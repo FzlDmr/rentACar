@@ -1,9 +1,12 @@
 package com.dev3.rentACar.webApi.controllers;
 
 import com.dev3.rentACar.business.abstracts.BrandService;
+import com.dev3.rentACar.business.reponses.GetAllBrandsResponse;
+import com.dev3.rentACar.business.requests.CreateBrandRequest;
 import com.dev3.rentACar.entities.concretes.Brand;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,7 +24,12 @@ public class BrandsController {
     }
 
     @GetMapping("/getAll")
-    public List<Brand> getAll(){
+    public List<GetAllBrandsResponse> getAll(){
         return brandService.getAll();
     }
+
+    @PostMapping("/add")
+    public void add(CreateBrandRequest createBrandRequest){
+       this.brandService.add(createBrandRequest);
+     }
 }
