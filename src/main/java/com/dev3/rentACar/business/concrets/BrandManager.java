@@ -2,7 +2,9 @@ package com.dev3.rentACar.business.concrets;
 
 import com.dev3.rentACar.business.abstracts.BrandService;
 import com.dev3.rentACar.business.reponses.GetAllBrandsResponse;
+import com.dev3.rentACar.business.reponses.GetByIdBrandResponse;
 import com.dev3.rentACar.business.requests.CreateBrandRequest;
+import com.dev3.rentACar.business.requests.UpdateBrandRequest;
 import com.dev3.rentACar.core.utilities.mappers.ModelMapperService;
 import com.dev3.rentACar.dataAccess.abstracts.BrandRepository;
 import com.dev3.rentACar.entities.concretes.Brand;
@@ -40,6 +42,15 @@ public class BrandManager implements BrandService {
     }
 
     @Override
+    public GetByIdBrandResponse getById(int id) {
+
+       Brand brand =  this.brandRepository.findById(id).orElseThrow();
+
+       return this.modelMapperService.forResponse().map(brand,GetByIdBrandResponse.class);
+
+    }
+
+    @Override
     public void add(CreateBrandRequest createBrandRequest) {
         // Brand brand = new Brand();
         // brand.setName(createBrandRequest.getName());
@@ -48,5 +59,18 @@ public class BrandManager implements BrandService {
         Brand brand = this.modelMapperService.forRequest().map(createBrandRequest, Brand.class);
 
         this.brandRepository.save(brand);
+    }
+
+    @Override
+    public void update(UpdateBrandRequest updateBrandRequest) {
+
+       Brand brand = this.modelMapperService.forResponse().map(updateBrandRequest,Brand.class);
+       this.brandRepository.save(brand);
+    }
+
+    @Override
+    public void delete(int id) {
+        this.brandRepository.deleteById(id);
+
     }
 }
