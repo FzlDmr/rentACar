@@ -30,7 +30,7 @@ public class Car {
 
     @ManyToOne
     @JoinColumn(name="model_id")
-    private Model model;//Burada sadece model_id yi almamiz yeterli model in icinde brand bilgisi oldugu icin
+    private Model model;//Burada sadece m odel_id yi almamiz yeterli model in icinde brand bilgisi oldugu icin
 
 
 
