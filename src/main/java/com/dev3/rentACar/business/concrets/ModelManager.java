@@ -1,7 +1,8 @@
 package com.dev3.rentACar.business.concrets;
 
 import com.dev3.rentACar.business.abstracts.ModelService;
-import com.dev3.rentACar.business.reponses.GetAllModelsRepsonse;
+
+import com.dev3.rentACar.business.reponses.GetAllModelsResponse;
 import com.dev3.rentACar.business.requests.CreateModelRequest;
 import com.dev3.rentACar.core.utilities.mappers.ModelMapperManager;
 import com.dev3.rentACar.dataAccess.abstracts.ModelRepository;
@@ -19,13 +20,13 @@ public class ModelManager implements ModelService {
     private ModelMapperManager modelMapperService;
 
     @Override
-    public List<GetAllModelsRepsonse> getAll() {
+    public List<GetAllModelsResponse> getAll() {
 
         List<Model> models = modelRepository.findAll();
 
         return models.stream()
                      .map(model -> this.modelMapperService.forResponse()
-                     .map(model, GetAllModelsRepsonse.class)).toList();
+                     .map(model, GetAllModelsResponse.class)).toList();
     }
 
     @Override
